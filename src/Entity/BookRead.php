@@ -38,6 +38,37 @@ class BookRead
     #[ORM\Column]
     private ?\DateTime $updated_at = null;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $title;
+
+    #[ORM\ManyToOne(targetEntity: Book::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Book $book = null;
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    public function getBook(): ?Book
+    {
+        return $this->book;
+    }
+
+    // Ajoute le setter pour définir la relation (facultatif selon ton utilisation)
+    public function setBook(?Book $book): self
+    {
+        $this->book = $book;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -1,0 +1,58 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <!-- Page -->
+    <div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg">
+        <div class="card max-w-[370px] w-full">
+            <form action="{{ path('app_register') }}" class="card-body flex flex-col gap-5 p-10" id="sign_up_form" method="post">
+                <div class="text-center mb-2.5">
+                    <h3 class="text-lg font-medium text-gray-900 leading-none mb-2.5">
+                        Inscription
+                    </h3>
+                    <div class="flex items-center justify-center">
+                        <span class="text-2sm text-gray-700 me-1.5">
+                            Vous avez déjà un compte ?
+                        </span>
+                        <a class="text-2sm link" href="{{ path('app_register') }}">
+                            Me connecter
+                        </a>
+                    </div>
+                </div>
+
+                {{ form_start(registrationForm) }}
+                <div class="flex flex-col gap-1">
+                    <label class="form-label text-gray-900">Email</label>
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'input', 'placeholder': 'Adresse email'}}) }}
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="form-label font-normal text-gray-900">Mot de passe</label>
+                    <div class="input" data-toggle-password="true">
+                        {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'input', 'placeholder': 'Mot de passe'}}) }}
+                        <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
+                            <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden"></i>
+                            <i class="ki-filled ki-eye-slash text-gray-500 hidden toggle-password-active:block"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="form-label font-normal text-gray-900">Confirmer le mot de passe</label>
+                    <div class="input" data-toggle-password="true">
+                        {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'input', 'placeholder': 'Confirmer le mot de passe'}}) }}
+                    </div>
+                </div>
+                <label class="checkbox-group">
+                    <input class="checkbox checkbox-sm" name="check" type="checkbox" value="1" />
+                    <span class="checkbox-label">
+                        J'accepte les <a class="text-2sm link" href="#">GCU</a>
+                    </span>
+                </label>
+                {{ form_row(registrationForm.agreeTerms) }}
+                <button type="submit" class="btn btn-primary flex justify-center grow">Inscription</button>
+                {{ form_end(registrationForm) }}
+            </form>
+        </div>
+    </div>
+    <!-- End of Page -->
+{% endblock %}
